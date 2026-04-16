@@ -28,8 +28,9 @@
       letter-spacing: .1em;
     }
     .info-sep { color: var(--border-glow); }
-    .map-wrapper { position: absolute; top: 56px; left: 0; right: 0; bottom: 0; }
-    .map-viewport { position: absolute; top: 36px; left: 0; right: 0; bottom: 0; }
+    .info-bar { position: absolute; top: 56px; left: 0; right: 0; }
+    .map-wrapper { position: absolute; top: 92px; left: 0; right: 0; bottom: 0; }
+    .map-viewport { position: absolute; inset: 0; }
     .map-controls { position: absolute; bottom: 20px; right: 20px; }
     .reset-btn {
       font-size: 10px; letter-spacing: .08em;
@@ -86,19 +87,19 @@
       </div>
     </header>
 
-    <div class="map-wrapper">
-      <div class="info-bar">
-        <span class="info-bar-title">LEESIS TUNNELS</span>
-        <span class="info-sep">|</span>
-        <span>SURVEY CS-5064</span>
-        <span class="info-sep">|</span>
-        <span>41ST ARF · MAP DIVISION</span>
-        <span class="info-sep" style="margin-left:auto">|</span>
-        <span id="zoom-readout">ZOOM: 100%</span>
-        <span class="info-sep">|</span>
-        <span id="coord-readout">X: — · Y: —</span>
-      </div>
+    <div class="info-bar">
+      <span class="info-bar-title">LEESIS TUNNELS</span>
+      <span class="info-sep">|</span>
+      <span>SURVEY CS-5064</span>
+      <span class="info-sep">|</span>
+      <span>41ST ARF · MAP DIVISION</span>
+      <span class="info-sep" style="margin-left:auto">|</span>
+      <span id="zoom-readout">ZOOM: 100%</span>
+      <span class="info-sep">|</span>
+      <span id="coord-readout">X: — · Y: —</span>
+    </div>
 
+    <div class="map-wrapper">
       <div class="map-viewport" id="viewport">
         <div class="map-container" id="map-container">
           <img id="map-img" src="../assets/LeesisTunnelMap.png" alt="Leesis Tunnels Map"
