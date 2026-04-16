@@ -1,0 +1,108 @@
+/* ─── IMPORTS ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap');
+
+/* ─── VARIABLES ───────────────────────────────────────── */
+:root {
+  --bg:          #040b12;
+  --bg2:         #071420;
+  --panel:       #091c2e;
+  --panel2:      #0d2540;
+  --border:      #1a4a6e;
+  --border-glow: #1e6fa8;
+  --accent:      #00d4ff;
+  --accent2:     #0088bb;
+  --accent-dim:  #005577;
+  --danger:      #ff4444;
+  --success:     #44ff88;
+  --warn:        #ffaa00;
+  --text:        #b8d8ee;
+  --text-dim:    #4a7a9b;
+  --text-bright: #e8f4ff;
+  --glow:        0 0 8px #00d4ff88, 0 0 20px #00d4ff33;
+  --glow-sm:     0 0 4px #00d4ff66;
+  --font-title:  'Orbitron', monospace;
+  --font-mono:   'Share Tech Mono', monospace;
+  --font-body:   'Exo 2', sans-serif;
+}
+
+/* ─── RESET & BASE ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── SCANLINE OVERLAY ────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+}
+
+/* ─── CORNER DECO ─────────────────────────────────────── */
+.corner-deco {
+  position: fixed; z-index: 100; pointer-events: none;
+  width: 60px; height: 60px;
+}
+.corner-deco--tl { top: 0; left: 0; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.corner-deco--tr { top: 0; right: 0; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.corner-deco--bl { bottom: 0; left: 0; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.corner-deco--br { bottom: 0; right: 0; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+/* ─── ANIMATIONS ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 0 0 transparent; }
+  50%      { box-shadow: 0 0 0 2px var(--accent2); }
+}
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.fade-up { animation: fadeUp .5s ease both; }
+.fade-up-1 { animation-delay: .05s; }
+.fade-up-2 { animation-delay: .1s; }
+.fade-up-3 { animation-delay: .15s; }
+.fade-up-4 { animation-delay: .2s; }
+
+/* ─── GRID LINES BG ───────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--panel2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--panel2) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── GLOW RULE ───────────────────────────────────────── */
+.glow-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: var(--glow-sm);
+  margin: 24px 0;
+}
+
+/* ─── UTILITY ─────────────────────────────────────────── */
+.text-accent { color: var(--accent); }
+.text-dim    { color: var(--text-dim); }
+.mt-auto     { margin-top: auto; }
+.d-flex      { display: flex; }
+.align-center { align-items: center; }
+.gap-8       { gap: 8px; }

@@ -1,0 +1,89 @@
+/* ─── BUTTONS ─────────────────────────────────────────── */
+.btn {
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 18px;
+  border: 1px solid var(--border-glow);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  position: relative;
+  transition: all .2s;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+.btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--accent);
+  opacity: 0; transition: opacity .2s;
+}
+.btn:hover {
+  color: var(--bg);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+.btn:hover::before { opacity: 1; }
+.btn span { position: relative; z-index: 1; }
+
+.btn-sm {
+  font-size: 9px;
+  padding: 5px 12px;
+}
+
+/* ─── PANELS ──────────────────────────────────────────── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.panel-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-title);
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--accent);
+  display: flex; align-items: center; gap: 8px;
+}
+.panel-header::before {
+  content: '';
+  display: inline-block; width: 3px; height: 12px;
+  background: var(--accent);
+  box-shadow: var(--glow-sm);
+}
+
+/* ─── SECTION TITLE ───────────────────────────────────── */
+.section-title {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--text-bright);
+  text-shadow: 0 0 30px #00d4ff44;
+  margin-bottom: 4px;
+}
+.section-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: .08em;
+}
+
+/* ─── TOOLTIP ─────────────────────────────────────────── */
+.tooltip {
+  position: fixed;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 6px 12px;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: var(--glow);
+  display: none;
+}
