@@ -13,12 +13,14 @@
   const cyZoomIn = document.getElementById('cy-zoom-in');
   const cyZoomOut = document.getElementById('cy-zoom-out');
   const cyFitBtn = document.getElementById('cy-fit');
+  const pathModeBtn = document.getElementById('path-mode-btn');
+  const editModeBtn = document.getElementById('edit-mode-btn');
   const connectBtn = document.getElementById('connect-btn');
   const deleteEdgeBtn = document.getElementById('delete-edge-btn');
   const editNodeBtn = document.getElementById('edit-node-btn');
   const exportBtn = document.getElementById('export-btn');
 
-  if (!infoBody || !pathFrom || !pathTo || !pathBtn || !pathClear || !pathResult || !cyZoomIn || !cyZoomOut || !cyFitBtn || !connectBtn || !deleteEdgeBtn || !editNodeBtn || !exportBtn) {
+  if (!infoBody || !pathFrom || !pathTo || !pathBtn || !pathClear || !pathResult || !cyZoomIn || !cyZoomOut || !cyFitBtn || !pathModeBtn || !editModeBtn || !connectBtn || !deleteEdgeBtn || !editNodeBtn || !exportBtn) {
     return;
   }
 
@@ -219,24 +221,40 @@
   let deleteEdgeNodes = [];
   let editNodeMode = false;
   let editTarget = null;
+  let pathMode = false;
+  let pathModeNodes = [];
+  let editModeActive = false;
+  const editActionButtons = [connectBtn, deleteEdgeBtn, editNodeBtn];
 
   connectBtn.onclick = function() {
+    if (!editModeActive) {
+      return;
+    }
     connectMode = !connectMode;
     deleteEdgeMode = false;
+    pathMode = false;
     connectNodes = [];
     deleteEdgeNodes = [];
+    pathModeNodes = [];
     connectBtn.textContent = connectMode ? 'Cancel Connect' : 'Connect Nodes';
     connectBtn.style.background = connectMode ? '#ffaa00' : '';
     deleteEdgeBtn.textContent = 'Delete Edge';
     deleteEdgeBtn.style.background = '';
+    pathModeBtn.textContent = 'Path Mode';
+    pathModeBtn.style.background = '';
   };
 
   deleteEdgeBtn.onclick = function() {
+    if (!editModeActive) {
+      return;
+    }
     deleteEdgeMode = !deleteEdgeMode;
     connectMode = false;
     editNodeMode = false;
+    pathMode = false;
     connectNodes = [];
     deleteEdgeNodes = [];
+    pathModeNodes = [];
     editTarget = null;
     deleteEdgeBtn.textContent = deleteEdgeMode ? 'Cancel Delete' : 'Delete Edge';
     deleteEdgeBtn.style.background = deleteEdgeMode ? '#ff6666' : '';
@@ -244,14 +262,21 @@
     connectBtn.style.background = '';
     editNodeBtn.textContent = 'Edit Node';
     editNodeBtn.style.background = '';
+    pathModeBtn.textContent = 'Path Mode';
+    pathModeBtn.style.background = '';
   };
 
   editNodeBtn.onclick = function() {
+    if (!editModeActive) {
+      return;
+    }
     editNodeMode = !editNodeMode;
     connectMode = false;
     deleteEdgeMode = false;
+    pathMode = false;
     connectNodes = [];
     deleteEdgeNodes = [];
+    pathModeNodes = [];
     editTarget = null;
     editNodeBtn.textContent = editNodeMode ? 'Cancel Edit' : 'Edit Node';
     editNodeBtn.style.background = editNodeMode ? '#66ccff' : '';
@@ -259,7 +284,73 @@
     connectBtn.style.background = '';
     deleteEdgeBtn.textContent = 'Delete Edge';
     deleteEdgeBtn.style.background = '';
+    pathModeBtn.textContent = 'Path Mode';
+    pathModeBtn.style.background = '';
   };
+
+  pathModeBtn.onclick = function() {
+    pathMode = !pathMode;
+    connectMode = false;
+    deleteEdgeMode = false;
+    editNodeMode = false;
+    connectNodes = [];
+    deleteEdgeNodes = [];
+    pathModeNodes = [];
+    editTarget = null;
+    pathModeBtn.textContent = pathMode ? 'Cancel Path' : 'Path Mode';
+    pathModeBtn.style.background = pathMode ? '#66ccff' : '';
+    connectBtn.textContent = 'Connect Nodes';
+    connectBtn.style.background = '';
+    deleteEdgeBtn.textContent = 'Delete Edge';
+    deleteEdgeBtn.style.background = '';
+    editNodeBtn.textContent = 'Edit Node';
+    editNodeBtn.style.background = '';
+    if (pathMode) {
+      pathResult.textContent = 'Click the start node, then the end node.';
+    } else {
+      pathResult.textContent = 'Select two nodes to find a route.';
+    }
+  };
+
+  editModeBtn.onclick = function() {
+    setEditMode(!editModeActive);
+    if (editModeActive) {
+      pathMode = false;
+      pathModeNodes = [];
+      pathModeBtn.textContent = 'Path Mode';
+      pathModeBtn.style.background = '';
+      pathResult.textContent = 'Edit mode active — choose an edit action.';
+    } else {
+      resetInfo();
+    }
+  };
+
+  function setEditMode(active) {
+    editModeActive = active;
+    editModeBtn.textContent = active ? 'Exit Edit Mode' : 'Edit Mode';
+    editModeBtn.style.background = active ? '#66ccff' : '';
+    editActionButtons.forEach(btn => {
+      btn.style.display = active ? 'inline-flex' : 'none';
+      btn.style.opacity = active ? '1' : '0';
+      btn.style.pointerEvents = active ? 'auto' : 'none';
+    });
+    if (!active) {
+      connectMode = false;
+      deleteEdgeMode = false;
+      editNodeMode = false;
+      connectNodes = [];
+      deleteEdgeNodes = [];
+      editTarget = null;
+      connectBtn.textContent = 'Connect Nodes';
+      connectBtn.style.background = '';
+      deleteEdgeBtn.textContent = 'Delete Edge';
+      deleteEdgeBtn.style.background = '';
+      editNodeBtn.textContent = 'Edit Node';
+      editNodeBtn.style.background = '';
+    }
+  }
+
+  setEditMode(false);
 
   function resetInfo() {
     infoBody.innerHTML = '<div class="info-empty">Click a node to inspect<br>its location data and<br>connected tunnels.</div>';
@@ -283,6 +374,30 @@
         connectBtn.textContent = 'Connect Nodes';
         connectBtn.style.background = '';
       }
+      return;
+    }
+
+    if (pathMode) {
+      pathModeNodes.push(node);
+      if (pathModeNodes.length === 1) {
+        cy.elements().removeClass('selected neighbor faded highlighted path-edge path-node');
+        node.addClass('selected');
+        pathResult.textContent = `Start selected: ${data.label}. Now click the end node.`;
+        return;
+      }
+
+      const source = pathModeNodes[0].id();
+      const target = node.id();
+      if (source === target) {
+        pathModeNodes = [];
+        pathResult.textContent = 'Choose a different end node.';
+        return;
+      }
+      findPathByIds(source, target);
+      pathMode = false;
+      pathModeNodes = [];
+      pathModeBtn.textContent = 'Path Mode';
+      pathModeBtn.style.background = '';
       return;
     }
 
@@ -376,29 +491,20 @@
         editNodeBtn.textContent = 'Edit Node';
         editNodeBtn.style.background = '';
       }
+      if (pathMode) {
+        pathMode = false;
+        pathModeNodes = [];
+        pathModeBtn.textContent = 'Path Mode';
+        pathModeBtn.style.background = '';
+      }
     }
   });
 
-  function findPath() {
-    const fromId = pathFrom.value;
-    const toId = pathTo.value;
-    if (!fromId || !toId) {
-      pathResult.textContent = 'Select both From and To nodes.';
-      return;
-    }
-    if (fromId === toId) {
-      pathResult.textContent = 'From and To must be different nodes.';
-      return;
-    }
-
+  function highlightPath(path) {
     cy.elements().removeClass('path-edge path-node selected neighbor faded highlighted');
-    const dijkstra = cy.elements().dijkstra({ root: `#${fromId}`, directed: false });
-    const pathToNode = cy.$(`#${toId}`);
-    const path = dijkstra.pathTo(pathToNode);
-
     if (path.length === 0) {
       pathResult.textContent = '⚠ No route found between these nodes.';
-      return;
+      return false;
     }
 
     cy.elements().not(path).addClass('faded');
@@ -408,6 +514,27 @@
     const nodeCount = path.nodes().length;
     const steps = path.nodes().map(n => n.data('label')).join(' → ');
     pathResult.innerHTML = `<strong style="color:var(--success)">Route found: ${nodeCount - 1} hop(s)</strong><br>${steps}`;
+    return true;
+  }
+
+  function findPathByIds(fromId, toId) {
+    if (!fromId || !toId) {
+      pathResult.textContent = 'Select both From and To nodes.';
+      return;
+    }
+    if (fromId === toId) {
+      pathResult.textContent = 'From and To must be different nodes.';
+      return;
+    }
+
+    const dijkstra = cy.elements().dijkstra({ root: `#${fromId}`, directed: false });
+    const pathToNode = cy.$(`#${toId}`);
+    const path = dijkstra.pathTo(pathToNode);
+    highlightPath(path);
+  }
+
+  function findPath() {
+    findPathByIds(pathFrom.value, pathTo.value);
   }
 
   pathBtn.addEventListener('click', findPath);
@@ -415,6 +542,10 @@
     cy.elements().removeClass('path-edge path-node selected neighbor faded highlighted');
     pathFrom.value = '';
     pathTo.value = '';
+    pathMode = false;
+    pathModeNodes = [];
+    pathModeBtn.textContent = 'Path Mode';
+    pathModeBtn.style.background = '';
     resetInfo();
   });
 
