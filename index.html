@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAR TACTICAL — Map Database</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--accent2);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      letter-spacing: .06em;
+      color: var(--text-bright);
+      text-shadow: 0 0 60px #00d4ff33;
+      line-height: 1.1;
+    }
+    .hero-title .accent { color: var(--accent); }
+    .hero-sub {
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; gap: 32px;
+      margin-top: 28px;
+    }
+    .stat {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .stat-val {
+      font-family: var(--font-title);
+      font-size: 20px; font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .hero-scan {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 260px;
+      background: linear-gradient(135deg, transparent 40%, var(--accent2) 100%);
+      opacity: .04;
+      pointer-events: none;
+    }
+    .section-header {
+      display: flex; align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .section-count {
+      font-family: var(--font-mono);
+      font-size: 11px; color: var(--text-dim);
+    }
+    .classified-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--warn);
+      border: 1px solid var(--warn);
+      padding: 2px 8px;
+      opacity: .6;
+    }
+    .planet-card-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--accent2) 0%, transparent 60%);
+      opacity: .15;
+    }
+    .surface-unavail {
+      position: absolute; bottom: 8px; right: 8px;
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--text-dim);
+      background: var(--bg);
+      padding: 2px 6px;
+      border: 1px solid var(--border);
+      letter-spacing: .05em;
+    }
+    .gar-logo {
+      font-family: var(--font-title);
+      font-size: 9px;
+      letter-spacing: .2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="corner-deco corner-deco--tl"></div>
+  <div class="corner-deco corner-deco--tr"></div>
+  <div class="corner-deco corner-deco--bl"></div>
+  <div class="corner-deco corner-deco--br"></div>
+
+  <div class="index-layout">
+    <header class="site-header">
+      <a href="index.html" class="header-logo">
+        <span class="logo-badge">GAR</span>
+        TACTICAL DATABASE
+      </a>
+      <div class="header-status">
+        <span><span class="status-dot"></span> SYSTEM ONLINE</span>
+        <span>41ST ARF · MAP DIVISION</span>
+      </div>
+    </header>
+
+    <main class="index-main">
+      <div class="hero fade-up">
+        <div class="hero-scan"></div>
+        <div class="hero-label">// GAR INTELLIGENCE DIVISION · MAP ARCHIVE v3.1 //</div>
+        <h1 class="hero-title">
+          PLANETARY<br><span class="accent">MAP DATABASE</span>
+        </h1>
+        <p class="hero-sub">
+          Classified cartographic records. Authorized personnel only.
+          Select a planetary system to access available surveys, tunnel
+          networks, and tactical overlays.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-val">01</span>
+            <span class="stat-label">Planets Indexed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val">03</span>
+            <span class="stat-label">Map Views</span>
+          </div>
+          <div class="stat">
+            <span class="stat-val">41</span>
+            <span class="stat-label">ARF Battalion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header fade-up fade-up-1">
+        <div>
+          <div class="section-title">ACTIVE SURVEYS</div>
+          <div class="section-sub">Select a planetary entry to access map views</div>
+        </div>
+        <span class="section-count">1 RECORD</span>
+      </div>
+
+      <div class="planet-grid">
+        <a href="christophsis/index.html" class="planet-card fade-up fade-up-2">
+          <div class="planet-card-img">
+            <div class="planet-card-img-overlay"></div>
+            <img src="assets/christophsis_tunnels.png" alt="Christophsis tunnel map preview">
+            <span class="surface-unavail">MULTI-VIEW AVAILABLE</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">CHRISTOPHSIS</div>
+            <div class="planet-card-meta">OUTER RIM · CHRISTOPH SYSTEM · SURVEY CS-5064</div>
+            <div class="planet-card-tags">
+              <span class="tag">TUNNEL NETWORK</span>
+              <span class="tag">REACTOR SYSTEMS</span>
+              <span class="tag">ACTIVE ZONE</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Placeholder locked entries -->
+        <div class="planet-card fade-up fade-up-3" style="opacity:.35; cursor:not-allowed; pointer-events:none;">
+          <div class="planet-card-img">
+            <span class="planet-placeholder">[ NO SIGNAL ]</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">CLASSIFIED</div>
+            <div class="planet-card-meta">ACCESS RESTRICTED</div>
+            <div class="planet-card-tags">
+              <span class="tag">ENCRYPTED</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="planet-card fade-up fade-up-4" style="opacity:.35; cursor:not-allowed; pointer-events:none;">
+          <div class="planet-card-img">
+            <span class="planet-placeholder">[ NO SIGNAL ]</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">CLASSIFIED</div>
+            <div class="planet-card-meta">ACCESS RESTRICTED</div>
+            <div class="planet-card-tags">
+              <span class="tag">ENCRYPTED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <span class="footer-text">GAR TACTICAL DATABASE · 41ST ARF · MAP DIVISION · CONFIDENTIAL</span>
+      <span class="footer-text">CS-5064 "SCALAR" · CO-0249 "SERO" · ARC-4762 "SLOTH"</span>
+    </footer>
+  </div>
+</body>
+</html>
