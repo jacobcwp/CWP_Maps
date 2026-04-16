@@ -53,7 +53,7 @@
     const sy = (vh * 0.9) / ih;
     scale = Math.min(sx, sy, 1);
     panX = (vw - iw * scale) / 2;
-    panY = (vh - ih * scale) / 2;
+    panY = 0;
     applyTransform();
   }
 
