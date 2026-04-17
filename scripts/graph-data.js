@@ -58,8 +58,8 @@ window.graphNodes = [
     "label": "Tube Room",
     "type": "room",
     "pos": {
-      "x": 310,
-      "y": 555
+      "x": 379,
+      "y": 628
     }
   },
   {
@@ -67,8 +67,8 @@ window.graphNodes = [
     "label": "Dead End",
     "type": "deadend",
     "pos": {
-      "x": 276,
-      "y": 672
+      "x": 374,
+      "y": 730
     }
   },
   {
@@ -94,8 +94,8 @@ window.graphNodes = [
     "label": "Chair Room",
     "type": "room",
     "pos": {
-      "x": 268,
-      "y": 723
+      "x": 373,
+      "y": 806
     }
   },
   {
@@ -103,8 +103,8 @@ window.graphNodes = [
     "label": "Barracks",
     "type": "room",
     "pos": {
-      "x": -142,
-      "y": 634
+      "x": -73,
+      "y": 707
     }
   },
   {
@@ -112,8 +112,8 @@ window.graphNodes = [
     "label": "Cafeteria",
     "type": "room",
     "pos": {
-      "x": -155,
-      "y": 727
+      "x": -86,
+      "y": 800
     }
   },
   {
@@ -121,8 +121,8 @@ window.graphNodes = [
     "label": "Brig",
     "type": "key",
     "pos": {
-      "x": -7,
-      "y": 369
+      "x": 62,
+      "y": 442
     }
   },
   {
@@ -130,8 +130,8 @@ window.graphNodes = [
     "label": "Checkpoint",
     "type": "defense",
     "pos": {
-      "x": 51,
-      "y": 419
+      "x": 120,
+      "y": 492
     }
   },
   {
@@ -139,8 +139,8 @@ window.graphNodes = [
     "label": "Defensible Hall",
     "type": "defense",
     "pos": {
-      "x": 50,
-      "y": 494
+      "x": 119,
+      "y": 567
     }
   },
   {
@@ -148,8 +148,8 @@ window.graphNodes = [
     "label": "Elevator 5 (Broken)",
     "type": "elevator_red",
     "pos": {
-      "x": 99,
-      "y": 364
+      "x": 168,
+      "y": 437
     }
   },
   {
@@ -157,8 +157,8 @@ window.graphNodes = [
     "label": "Big Brig",
     "type": "key",
     "pos": {
-      "x": 207,
-      "y": 110
+      "x": 276,
+      "y": 183
     }
   },
   {
@@ -166,8 +166,8 @@ window.graphNodes = [
     "label": "Defensible Hall",
     "type": "defense",
     "pos": {
-      "x": 167,
-      "y": 165
+      "x": 236,
+      "y": 238
     }
   },
   {
@@ -175,8 +175,8 @@ window.graphNodes = [
     "label": "Brig",
     "type": "key",
     "pos": {
-      "x": 124,
-      "y": 96
+      "x": 193,
+      "y": 169
     }
   },
   {
@@ -184,8 +184,8 @@ window.graphNodes = [
     "label": "Elevator 6 (Broken)",
     "type": "elevator_red",
     "pos": {
-      "x": 74,
-      "y": 58
+      "x": 143,
+      "y": 131
     }
   },
   {
@@ -445,8 +445,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 140,
-      "y": 698
+      "x": 209,
+      "y": 771
     }
   },
   {
@@ -454,8 +454,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 44.54054809201927,
-      "y": 765.2561180208838
+      "x": 114,
+      "y": 838
     }
   },
   {
@@ -472,8 +472,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": -28,
-      "y": 688
+      "x": 41,
+      "y": 761
     }
   },
   {
@@ -481,8 +481,8 @@ window.graphNodes = [
     "label": "Chair Room",
     "type": "room",
     "pos": {
-      "x": -108.71584378143022,
-      "y": 685.2599294309905
+      "x": -39,
+      "y": 758
     }
   },
   {
@@ -490,8 +490,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": -27,
-      "y": 607
+      "x": 42,
+      "y": 680
     }
   },
   {
@@ -499,8 +499,8 @@ window.graphNodes = [
     "label": "Small Reactor",
     "type": "key",
     "pos": {
-      "x": -88.53557748892291,
-      "y": 546.0160920126908
+      "x": -19,
+      "y": 619
     }
   },
   {
@@ -508,8 +508,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 45.66319335625033,
-      "y": 555.0972118443188
+      "x": 115,
+      "y": 628
     }
   },
   {
@@ -517,8 +517,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 140,
-      "y": 603
+      "x": 209,
+      "y": 676
     }
   },
   {
@@ -526,8 +526,8 @@ window.graphNodes = [
     "label": "Chair Room",
     "type": "room",
     "pos": {
-      "x": 195,
-      "y": 505
+      "x": 264,
+      "y": 578
     }
   },
   {
@@ -535,8 +535,8 @@ window.graphNodes = [
     "label": "Comms RM",
     "type": "room",
     "pos": {
-      "x": 171,
-      "y": 377
+      "x": 240,
+      "y": 450
     }
   },
   {
@@ -544,8 +544,8 @@ window.graphNodes = [
     "label": "Comms RM",
     "type": "room",
     "pos": {
-      "x": 152,
-      "y": 337
+      "x": 221,
+      "y": 410
     }
   },
   {
@@ -562,8 +562,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 307.83338268283933,
-      "y": 418.2026941480191
+      "x": 377,
+      "y": 491
     }
   },
   {
@@ -571,8 +571,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 158,
-      "y": 275
+      "x": 227,
+      "y": 348
     }
   },
   {
@@ -580,8 +580,8 @@ window.graphNodes = [
     "label": "Small Reactor",
     "type": "key",
     "pos": {
-      "x": 81,
-      "y": 281
+      "x": 150,
+      "y": 354
     }
   },
   {
@@ -589,8 +589,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 390,
-      "y": 296
+      "x": 488,
+      "y": 292
     }
   },
   {
@@ -607,8 +607,8 @@ window.graphNodes = [
     "label": "Defensible Position",
     "type": "defense",
     "pos": {
-      "x": 323,
-      "y": 241
+      "x": 392,
+      "y": 314
     }
   },
   {
@@ -616,8 +616,8 @@ window.graphNodes = [
     "label": "Junction",
     "type": "junction",
     "pos": {
-      "x": 340,
-      "y": 171
+      "x": 409,
+      "y": 244
     }
   },
   {
@@ -625,8 +625,8 @@ window.graphNodes = [
     "label": "Defensible Hallway",
     "type": "defense",
     "pos": {
-      "x": 262,
-      "y": 254
+      "x": 331,
+      "y": 327
     }
   },
   {
@@ -634,8 +634,8 @@ window.graphNodes = [
     "label": "Comms Room",
     "type": "room",
     "pos": {
-      "x": 215,
-      "y": 225
+      "x": 284,
+      "y": 298
     }
   },
   {
@@ -643,8 +643,8 @@ window.graphNodes = [
     "label": "Chair Room",
     "type": "room",
     "pos": {
-      "x": 309,
-      "y": 131
+      "x": 378,
+      "y": 204
     }
   },
   {
@@ -652,8 +652,8 @@ window.graphNodes = [
     "label": "Hologram Room",
     "type": "room",
     "pos": {
-      "x": 245,
-      "y": 150
+      "x": 314,
+      "y": 223
     }
   },
   {
@@ -661,8 +661,8 @@ window.graphNodes = [
     "label": "Comms Room",
     "type": "room",
     "pos": {
-      "x": 412.3349463348718,
-      "y": 152.6883441711028
+      "x": 510,
+      "y": 149
     }
   },
   {
@@ -670,8 +670,8 @@ window.graphNodes = [
     "label": "Big Brig",
     "type": "key",
     "pos": {
-      "x": 319,
-      "y": 60
+      "x": 388,
+      "y": 133
     }
   },
   {
