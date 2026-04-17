@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surface Map — Christophsis · GAR Tactical</title>
+  <title>Surface Map — Christophsis · 41ST TACTICAL</title>
+  <link rel="icon" href="../logo/41stLogo.png">
   <link rel="stylesheet" href="../style.css">
   <style>
     body, html { overflow: hidden; }
@@ -49,6 +50,7 @@
       position: absolute;
       bottom: 20px; right: 20px;
       display: flex; flex-direction: column; gap: 4px;
+      align-items: flex-end;
       z-index: 10;
     }
     .reset-btn {
@@ -92,8 +94,8 @@
   <div class="fullscreen-layout">
     <header class="site-header">
       <a href="../index.html" class="header-logo">
-        <span class="logo-badge">GAR</span>
-        TACTICAL DATABASE
+        <img src="../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
+        41ST TACTICAL DATABASE
       </a>
       <div class="header-status">
         <span class="breadcrumb">
@@ -130,6 +132,7 @@
         <div class="zoom-display" id="zoom-label">100%</div>
         <button class="map-btn" id="btn-zoom-out" title="Zoom Out">−</button>
         <button class="map-btn reset-btn" id="btn-reset" title="Reset View">⌂</button>
+        <button class="map-btn" id="btn-download" title="Download Map">↓</button>
       </div>
 
       <div class="help-tip">

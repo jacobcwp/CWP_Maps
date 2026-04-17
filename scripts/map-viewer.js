@@ -8,6 +8,7 @@
   const btnZoomIn = document.getElementById('btn-zoom-in');
   const btnZoomOut = document.getElementById('btn-zoom-out');
   const btnReset = document.getElementById('btn-reset');
+  const btnDownload = document.getElementById('btn-download');
 
   if (!viewport || !container || !img || !zoomLabel || !btnZoomIn || !btnZoomOut || !btnReset) {
     return;
@@ -159,4 +160,14 @@
   });
 
   btnReset.addEventListener('click', fitToView);
+
+  if (btnDownload) {
+    btnDownload.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = img.src;
+      const filename = img.alt ? img.alt.replace(/ /g, '_') + '.png' : 'map.png';
+      link.download = filename;
+      link.click();
+    });
+  }
 })();
