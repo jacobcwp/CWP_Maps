@@ -137,12 +137,54 @@
   });
 
   window.graphCy = cy;
+
+  // Build a bridge from cytoscape edge IDs (e0, e1, ...) to analytics edge IDs (edge_src_tgt_idx).
+  // graph-analytics.js already ran and built its model from window.graphEdges *before* graph-viewer
+  // overwrote them with simple e0/e1 IDs. We rebuild the lookup here by matching source/target pairs.
+  function buildEdgeIdBridge() {
+    const bridge = new Map(); // cy edge id -> analytics edge id
+    if (!window.GraphAnalysis) return bridge;
+    const analyticsEdges = window.GraphAnalysis.graph.edges; // has source, target, id
+    cy.edges().forEach(cyEdge => {
+      const src = cyEdge.data('source');
+      const tgt = cyEdge.data('target');
+      const match = analyticsEdges.find(ae =>
+        (ae.source === src && ae.target === tgt) ||
+        (ae.source === tgt && ae.target === src)
+      );
+      if (match) bridge.set(cyEdge.id(), match.id);
+    });
+    return bridge;
+  }
+
+  // Apply heatmap colors to the cy instance using correct IDs.
+  function applyCyHeatmap(nodeHeatMap, edgeHeatMap, edgeBridge) {
+    cy.nodes().forEach(node => {
+      const h = nodeHeatMap[node.id()];
+      if (h) {
+        node.style('background-color', h.color);
+        node.style('border-color', h.color);
+      }
+    });
+    cy.edges().forEach(edge => {
+      const analyticsId = edgeBridge.get(edge.id());
+      const h = analyticsId ? edgeHeatMap[analyticsId] : null;
+      if (h) {
+        edge.style('line-color', h.color);
+        edge.style('width', 1.5 + h.value * 3);
+      }
+    });
+  }
+
   window.applyGraphHeatmap = function(options = {}) {
-    if (window.GraphAnalysis && window.graphCy) {
-      window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, options);
-    } else {
+    if (!window.GraphAnalysis || !window.graphCy) {
       console.warn('GraphAnalysis or graphCy is not available yet.');
+      return;
     }
+    const bridge = buildEdgeIdBridge();
+    const nodeHeat = window.GraphAnalysis.getNodeHeat(options.nodeField || 'combined');
+    const edgeHeat = window.GraphAnalysis.getEdgeHeat(options.edgeField || 'combined');
+    applyCyHeatmap(nodeHeat, edgeHeat, bridge);
   };
 
   cy.fit(cy.nodes(), 60);
@@ -261,6 +303,11 @@
     window.GraphAnalysis.computeCentrality();
     const ranked = window.GraphAnalysis.getRankedLists({ maxItems: 5 });
     renderAnalysisBody(ranked);
+    // Color nodes by betweenness centrality (choke-point heatmap, no traffic needed)
+    const bridge = buildEdgeIdBridge();
+    const nodeHeat = window.GraphAnalysis.getNodeHeat('betweenness');
+    const edgeHeat = window.GraphAnalysis.getEdgeHeat('betweenness');
+    applyCyHeatmap(nodeHeat, edgeHeat, bridge);
   }
 
   function simulateGraphTraffic() {
@@ -272,7 +319,11 @@
     window.GraphAnalysis.getHeatmaps();
     const ranked = window.GraphAnalysis.getRankedLists({ maxItems: 5 });
     renderAnalysisBody(ranked);
-    alert('Traffic simulation completed. Heatmap updated.');
+    // Color nodes/edges by traffic volume
+    const bridge = buildEdgeIdBridge();
+    const nodeHeat = window.GraphAnalysis.getNodeHeat('traffic');
+    const edgeHeat = window.GraphAnalysis.getEdgeHeat('traffic');
+    applyCyHeatmap(nodeHeat, edgeHeat, bridge);
   }
 
   function applyHeatmapCombined() {
@@ -280,7 +331,10 @@
       alert('Graph analysis is not loaded yet.');
       return;
     }
-    window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, { nodeField: 'combined', edgeField: 'combined' });
+    const bridge = buildEdgeIdBridge();
+    const nodeHeat = window.GraphAnalysis.getNodeHeat('combined');
+    const edgeHeat = window.GraphAnalysis.getEdgeHeat('combined');
+    applyCyHeatmap(nodeHeat, edgeHeat, bridge);
   }
 
   function applyHeatmapTraffic() {
@@ -288,7 +342,10 @@
       alert('Graph analysis is not loaded yet.');
       return;
     }
-    window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, { nodeField: 'traffic', edgeField: 'traffic' });
+    const bridge = buildEdgeIdBridge();
+    const nodeHeat = window.GraphAnalysis.getNodeHeat('traffic');
+    const edgeHeat = window.GraphAnalysis.getEdgeHeat('traffic');
+    applyCyHeatmap(nodeHeat, edgeHeat, bridge);
   }
 
   function resetGraphStyles() {

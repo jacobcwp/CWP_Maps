@@ -41,12 +41,14 @@
   display: flex; align-items: center; justify-content: center;
   transition: all .15s;
   font-family: var(--font-mono);
+  white-space: nowrap;
 }
 .map-btn:hover {
   background: var(--accent);
   color: var(--bg);
   box-shadow: var(--glow);
 }
+
 .map-zoom-label {
   font-family: var(--font-mono);
   font-size: 10px;
