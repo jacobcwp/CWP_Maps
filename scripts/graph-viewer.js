@@ -15,12 +15,20 @@
   const cyFitBtn = document.getElementById('cy-fit');
   const pathModeBtn = document.getElementById('path-mode-btn');
   const editModeBtn = document.getElementById('edit-mode-btn');
+  const analyzeModeBtn = document.getElementById('analyze-mode-btn');
   const connectBtn = document.getElementById('connect-btn');
   const deleteEdgeBtn = document.getElementById('delete-edge-btn');
   const editNodeBtn = document.getElementById('edit-node-btn');
   const exportBtn = document.getElementById('export-btn');
+  const runAnalysisBtn = document.getElementById('run-analysis-btn');
+  const simulateTrafficBtn = document.getElementById('simulate-traffic-btn');
+  const heatmapCombinedBtn = document.getElementById('heatmap-combined-btn');
+  const heatmapTrafficBtn = document.getElementById('heatmap-traffic-btn');
+  const resetStylesBtn = document.getElementById('reset-styles-btn');
+  const analyzeActionPanel = document.getElementById('analyze-action-panel');
+  const analysisBody = document.getElementById('analysis-body');
 
-  if (!infoBody || !pathFrom || !pathTo || !pathBtn || !pathClear || !pathResult || !cyZoomIn || !cyZoomOut || !cyFitBtn || !pathModeBtn || !editModeBtn || !connectBtn || !deleteEdgeBtn || !editNodeBtn || !exportBtn) {
+  if (!infoBody || !pathFrom || !pathTo || !pathBtn || !pathClear || !pathResult || !cyZoomIn || !cyZoomOut || !cyFitBtn || !pathModeBtn || !editModeBtn || !analyzeModeBtn || !connectBtn || !deleteEdgeBtn || !editNodeBtn || !exportBtn || !runAnalysisBtn || !simulateTrafficBtn || !heatmapCombinedBtn || !heatmapTrafficBtn || !resetStylesBtn || !analyzeActionPanel || !analysisBody) {
     return;
   }
 
@@ -128,6 +136,15 @@
     boxSelectionEnabled: true,
   });
 
+  window.graphCy = cy;
+  window.applyGraphHeatmap = function(options = {}) {
+    if (window.GraphAnalysis && window.graphCy) {
+      window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, options);
+    } else {
+      console.warn('GraphAnalysis or graphCy is not available yet.');
+    }
+  };
+
   cy.fit(cy.nodes(), 60);
 
   // Enable editing
@@ -213,6 +230,107 @@
       console.log(payload);
     }
   };
+
+  function renderAnalysisBody(data) {
+    if (!analysisBody) return;
+    const sections = [];
+    if (data.topChokePoints) {
+      sections.push('<div><strong>Top choke points</strong><ul>' + data.topChokePoints.map(item => `<li>${item.label} (${item.type})</li>`).join('') + '</ul></div>');
+    }
+    if (data.topDefensivePositions) {
+      sections.push('<div><strong>Defensive positions</strong><ul>' + data.topDefensivePositions.map(item => `<li>${item.label} (${item.type})</li>`).join('') + '</ul></div>');
+    }
+    if (data.mostUsedTunnels) {
+      sections.push('<div><strong>Top tunnels</strong><ul>' + data.mostUsedTunnels.map(item => `<li>${item.source} → ${item.target}</li>`).join('') + '</ul></div>');
+    }
+    if (data.criticalInfrastructureNodes) {
+      sections.push('<div><strong>Critical infrastructure</strong><ul>' + data.criticalInfrastructureNodes.map(item => `<li>${item.label} (${item.type})</li>`).join('') + '</ul></div>');
+    }
+    if (!sections.length) {
+      analysisBody.innerHTML = '<div class="info-empty">No analysis data available.</div>';
+      return;
+    }
+    analysisBody.innerHTML = sections.join('');
+  }
+
+  function runGraphAnalysis() {
+    if (!window.GraphAnalysis) {
+      alert('Graph analysis is not loaded yet.');
+      return;
+    }
+    window.GraphAnalysis.computeCentrality();
+    const ranked = window.GraphAnalysis.getRankedLists({ maxItems: 5 });
+    renderAnalysisBody(ranked);
+  }
+
+  function simulateGraphTraffic() {
+    if (!window.GraphAnalysis) {
+      alert('Graph analysis is not loaded yet.');
+      return;
+    }
+    window.GraphAnalysis.simulateTraffic({ agentCount: 30, steps: 180 });
+    window.GraphAnalysis.getHeatmaps();
+    const ranked = window.GraphAnalysis.getRankedLists({ maxItems: 5 });
+    renderAnalysisBody(ranked);
+    alert('Traffic simulation completed. Heatmap updated.');
+  }
+
+  function applyHeatmapCombined() {
+    if (!window.GraphAnalysis) {
+      alert('Graph analysis is not loaded yet.');
+      return;
+    }
+    window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, { nodeField: 'combined', edgeField: 'combined' });
+  }
+
+  function applyHeatmapTraffic() {
+    if (!window.GraphAnalysis) {
+      alert('Graph analysis is not loaded yet.');
+      return;
+    }
+    window.GraphAnalysis.applyCytoscapeHeatmap(window.graphCy, { nodeField: 'traffic', edgeField: 'traffic' });
+  }
+
+  function resetGraphStyles() {
+    cy.elements().removeStyle();
+    cy.edges().style('line-color', '#1a4a6e');
+    cy.nodes().forEach(node => {
+      node.style('background-color', typeColors[node.data('type')]?.bg || '#1a3a5c');
+      node.style('border-color', typeColors[node.data('type')]?.border || '#2a5a8c');
+    });
+  }
+
+  const analyzeModeButtons = [runAnalysisBtn, simulateTrafficBtn, heatmapCombinedBtn, heatmapTrafficBtn, resetStylesBtn];
+  let analyzeModeActive = false;
+
+  function setAnalyzeMode(active) {
+    analyzeModeActive = active;
+    analyzeModeBtn.textContent = active ? 'Exit Analyze' : 'Analyze Mode';
+    analyzeModeBtn.style.background = active ? '#66ccff' : '';
+    analyzeActionPanel.style.display = active ? 'block' : 'none';
+    analyzeModeButtons.forEach(btn => {
+      btn.style.display = active ? 'inline-flex' : 'none';
+      btn.style.opacity = active ? '1' : '0';
+      btn.style.pointerEvents = active ? 'auto' : 'none';
+    });
+    if (!active) {
+      analysisBody.innerHTML = '<div class="info-empty">Press Analyze or Simulate to show ranked choke points, defensive positions, and tunnel usage.</div>';
+    }
+  }
+
+  runAnalysisBtn.onclick = runGraphAnalysis;
+  simulateTrafficBtn.onclick = simulateGraphTraffic;
+  heatmapCombinedBtn.onclick = applyHeatmapCombined;
+  heatmapTrafficBtn.onclick = applyHeatmapTraffic;
+  resetStylesBtn.onclick = resetGraphStyles;
+  analyzeModeBtn.onclick = function() {
+    if (editModeActive) {
+      setEditMode(false);
+    }
+    setAnalyzeMode(!analyzeModeActive);
+  };
+
+  setAnalyzeMode(false);
 
   // Add connect, delete edge and edit node buttons
   let connectMode = false;
@@ -313,6 +431,9 @@
   };
 
   editModeBtn.onclick = function() {
+    if (!editModeActive && analyzeModeActive) {
+      setAnalyzeMode(false);
+    }
     setEditMode(!editModeActive);
     if (editModeActive) {
       pathMode = false;
@@ -326,6 +447,9 @@
   };
 
   function setEditMode(active) {
+    if (active && analyzeModeActive) {
+      setAnalyzeMode(false);
+    }
     editModeActive = active;
     editModeBtn.textContent = active ? 'Exit Edit Mode' : 'Edit Mode';
     editModeBtn.style.background = active ? '#66ccff' : '';
