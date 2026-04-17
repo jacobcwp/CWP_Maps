@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime — 41st Tactical</title>
+  <link rel="icon" href="../../logo/41stLogo.png">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .planet-hero {
+      padding: 40px 0 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .planet-hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 80% 50%, #00d4ff08 0%, transparent 60%);
+    }
+    .planet-tag-row {
+      display: flex; gap: 8px; margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .ptag {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 2px 8px;
+      border: 1px solid var(--border-glow);
+      color: var(--text-dim);
+    }
+    .ptag.active { border-color: var(--accent); color: var(--accent); }
+    .planet-data-row {
+      display: flex; gap: 32px; margin-top: 20px; flex-wrap: wrap;
+    }
+    .pdata { display: flex; flex-direction: column; gap: 2px; }
+    .pdata-label {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--text-dim); letter-spacing: .1em; text-transform: uppercase;
+    }
+    .pdata-val {
+      font-family: var(--font-title); font-size: 13px;
+      font-weight: 600; color: var(--text-bright);
+    }
+    .views-header {
+      font-family: var(--font-title);
+      font-size: 10px; letter-spacing: .2em; color: var(--text-dim);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .view-grid { margin-top: 0; }
+    .view-card { min-height: 160px; }
+    .view-card-preview {
+      width: 100%;
+      height: 150px;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+      margin: 0 0 12px;
+    }
+
+    .notes-panel {
+      margin-top: 32px;
+    }
+    .notes-content {
+      padding: 14px 16px;
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--text-dim); line-height: 1.9;
+    }
+    .notes-content p { margin-bottom: 6px; }
+    .notes-content .hl { color: var(--text); }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 32px;
+      max-width: 960px;
+      margin: 0 auto; width: 100%;
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--text-dim); letter-spacing: .06em;
+      display: flex; justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="corner-deco corner-deco--tl"></div>
+  <div class="corner-deco corner-deco--tr"></div>
+  <div class="corner-deco corner-deco--bl"></div>
+  <div class="corner-deco corner-deco--br"></div>
+
+  <div class="map-select-layout">
+    <header class="site-header">
+      <a href="../../index.html" class="header-logo">
+        <img src="../../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
+        41ST TACTICAL DATABASE
+      </a>
+      <div class="header-status">
+        <span class="breadcrumb">
+          <a href="../../index.html">HOME</a>
+          <span class="breadcrumb-sep">/</span>
+          <span class="text-accent">PRIME</span>
+        </span>
+      </div>
+    </header>
+
+    <main class="map-select-main">
+      <div class="planet-hero fade-up">
+        <div class="planet-hero-bg"></div>
+        <div class="planet-tag-row">
+          <span class="ptag active">OUTER RIM</span>
+          <span class="ptag">STRATEGIC LOCATION</span>
+          <span class="ptag">SURVEY PRM-2847</span>
+        </div>
+        <h1 class="section-title">PRIME</h1>
+        <p class="section-sub" style="margin-top:6px;">
+          41ST ARF Map Survey · Cartographers: middle
+        </p>
+        <div class="planet-data-row">
+          <div class="pdata">
+            <span class="pdata-label">Region</span>
+            <span class="pdata-val">Outer Rim</span>
+          </div>
+          <div class="pdata">
+            <span class="pdata-label">Status</span>
+            <span class="pdata-val" style="color:var(--republic)">Republic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="views-header fade-up fade-up-1">// SELECT MAP VIEW //</div>
+
+      <div class="view-grid fade-up fade-up-2">
+        <a href="prime_map.html" class="view-card">
+          <img src="../../assets/PrimeSky.png" alt="Map preview" class="view-card-preview">
+          <div class="view-card-title">PRIME SKY MAP</div>
+          <div class="view-card-desc">
+            Overhead tactical survey of Prime.
+            Gives you a sense of the planet's scale. 
+          </div>
+          <div class="view-card-arrow">OPEN MAP →</div>
+        </a>
+      </div>
+    </main>
+
+    <footer>
+      <span>41ST TACTICAL DATABASE · PRIME · CONFIDENTIAL</span>
+    </footer>
+  </div>
+</body>
+</html>

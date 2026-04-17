@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surface Map — Christophsis · 41ST TACTICAL</title>
-  <link rel="icon" href="../logo/41stLogo.png">
-  <link rel="stylesheet" href="../style.css">
+  <title>Leesis Tunnels — Christophsis · 41ST TACTICAL</title>
+  <link rel="icon" href="../../logo/41stLogo.png">
+  <link rel="stylesheet" href="../../style.css">
   <style>
     body, html { overflow: hidden; }
     .info-bar {
@@ -32,27 +32,7 @@
     .info-bar { position: absolute; top: 56px; left: 0; right: 0; }
     .fullscreen-layout .map-wrapper { position: absolute; top: 92px; left: 0; right: 0; bottom: 0; }
     .map-viewport { position: absolute; inset: 0; }
-    .map-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: 0 0;
-      user-select: none;
-    }
-    .map-container img {
-      display: block;
-      max-width: none;
-      user-drag: none;
-      user-select: none;
-      pointer-events: none;
-    }
-    .map-controls {
-      position: absolute;
-      bottom: 20px; right: 20px;
-      display: flex; flex-direction: column; gap: 4px;
-      align-items: flex-end;
-      z-index: 10;
-    }
+    .map-controls { position: absolute; bottom: 20px; right: 20px; }
     .reset-btn {
       font-size: 10px; letter-spacing: .08em;
     }
@@ -93,27 +73,27 @@
 
   <div class="fullscreen-layout">
     <header class="site-header">
-      <a href="../index.html" class="header-logo">
-        <img src="../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
+      <a href="../../index.html" class="header-logo">
+        <img src="../../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
         41ST TACTICAL DATABASE
       </a>
       <div class="header-status">
         <span class="breadcrumb">
-          <a href="../index.html">HOME</a>
+          <a href="../../index.html">HOME</a>
           <span class="breadcrumb-sep">/</span>
           <a href="index.html">CHRISTOPHSIS</a>
           <span class="breadcrumb-sep">/</span>
-          <span class="text-accent">SURFACE MAP</span>
+          <span class="text-accent">TUNNEL MAP</span>
         </span>
       </div>
     </header>
 
     <div class="info-bar">
-      <span class="info-bar-title">SURFACE OVERLAY</span>
+      <span class="info-bar-title">LEESIS TUNNELS</span>
       <span class="info-sep">|</span>
-      <span>EXTERIOR SURVEY</span>
+      <span>SURVEY CS-5064</span>
       <span class="info-sep">|</span>
-      <span>CHRISTOPHSIS SECTOR</span>
+      <span>41ST ARF · NOX</span>
       <span class="info-sep" style="margin-left:auto">|</span>
       <span id="zoom-readout">ZOOM: 100%</span>
       <span class="info-sep">|</span>
@@ -123,16 +103,17 @@
     <div class="map-wrapper">
       <div class="map-viewport" id="viewport">
         <div class="map-container" id="map-container">
-          <img id="map-img" src="../assets/TophenCityMap.png" alt="Tophen City surface map" draggable="false">
+          <img id="map-img" src="../../assets/LeesisTunnelMap.png" alt="Leesis Tunnels Map"
+               draggable="false">
         </div>
       </div>
 
-      <div class="map-controls">
+      <div class="map-controls" style="flex-direction:column;gap:4px;align-items:flex-end;">
         <button class="map-btn" id="btn-zoom-in" title="Zoom In">+</button>
         <div class="zoom-display" id="zoom-label">100%</div>
         <button class="map-btn" id="btn-zoom-out" title="Zoom Out">−</button>
-        <button class="map-btn reset-btn" id="btn-reset" title="Reset View">⌂</button>
-        <button class="map-btn" id="btn-download" title="Download Map">↓</button>
+        <button class="map-btn reset-btn" id="btn-reset" title="Reset View" style="font-size:11px;">⌂</button>
+        <button class="map-btn" id="btn-download" title="Download Map" style="font-size:11px;">↓</button>
       </div>
 
       <div class="help-tip">
@@ -141,6 +122,7 @@
     </div>
   </div>
 
-  <script src="../scripts/map-viewer.js"></script>
+  <script src="../../scripts/map-viewer.js"></script>
 </body>
 </html>
+

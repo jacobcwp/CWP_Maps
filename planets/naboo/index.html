@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Naboo — 41st Tactical</title>
-  <link rel="icon" href="../logo/41stLogo.png">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" href="../../logo/41stLogo.png">
+  <link rel="stylesheet" href="../../style.css">
   <style>
     .planet-hero {
       padding: 40px 0 28px;
@@ -89,13 +89,13 @@
 
   <div class="map-select-layout">
     <header class="site-header">
-      <a href="../index.html" class="header-logo">
-        <img src="../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
+      <a href="../../index.html" class="header-logo">
+        <img src="../../logo/41stLogo.png" alt="41st Logo" style="height: 28px; width: auto;">
         41ST TACTICAL DATABASE
       </a>
       <div class="header-status">
         <span class="breadcrumb">
-          <a href="../index.html">HOME</a>
+          <a href="../../index.html">HOME</a>
           <span class="breadcrumb-sep">/</span>
           <span class="text-accent">NABOO</span>
         </span>
@@ -111,8 +111,9 @@
         </div>
         <h1 class="section-title">NABOO</h1>
         <p class="section-sub" style="margin-top:6px;">
-          41ST ARF Map Survey
+          41ST ARF Map Survey · Cartographers: RIO-3096 "Tiger", DDIR "Blackout", Jedi Knight Ale Ruun
         </p>
+        <!-- RIO-3096 "Tiger" -->
         <div class="planet-data-row">
           <div class="pdata">
             <span class="pdata-label">Region</span>
@@ -132,12 +133,22 @@
       <div class="views-header fade-up fade-up-1">// SELECT MAP VIEW //</div>
 
       <div class="view-grid fade-up fade-up-2">
-        <a href="naboo_map.html" class="view-card">
-          <img src="../assets/Naboo.png" alt="Tunnel map preview" class="view-card-preview">
+        <a href="naboo_surface_map.html" class="view-card">
+          <img src="../../assets/Naboo.png" alt="Surface map preview" class="view-card-preview">
           <!-- <div class="view-card-icon">🗺️</div> -->
           <div class="view-card-title">NABOO SURFACE MAP</div>
           <div class="view-card-desc">
-            A 
+            Surface-level tactical survey of Naboo with geographic features and terrain.
+          </div>
+          <div class="view-card-arrow">OPEN MAP →</div>
+        </a>
+
+        <a href="naboo_map.html" class="view-card">
+          <img src="../../assets/Naboo_Annotated_Map.png" alt="Annotated map preview" class="view-card-preview">
+          <!-- <div class="view-card-icon">🗺️</div> -->
+          <div class="view-card-title">NABOO ANNOTATED MAP</div>
+          <div class="view-card-desc">
+            Annotated surface map of Naboo with tactical overlay and key positions marked.
           </div>
           <div class="view-card-arrow">OPEN MAP →</div>
         </a>
@@ -147,7 +158,9 @@
       <div class="notes-panel panel fade-up fade-up-3">
         <div class="panel-header">SURVEY NOTES</div>
         <div class="notes-content">
-          <p>41st is no longer on Naboo.</p>
+          <p>Humble Farmer.</p>
+          <p>Gungans.</p>
+          <p style="color:var(--danger)">⚠ NOTE: Not all things are drawn to scale.</p>
         </div>
       </div>
     </main>
@@ -158,3 +171,4 @@
   </div>
 </body>
 </html>
+

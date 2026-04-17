@@ -119,6 +119,9 @@
       color: var(--text-dim);
       letter-spacing: .08em;
     }
+    .previous-surveys-header {
+      margin-top: 60px;
+    }
   </style>
 </head>
 <body>
@@ -176,7 +179,7 @@
       </div>
 
       <div class="planet-grid">
-        <a href="christophsis/index.html" class="planet-card fade-up fade-up-2">
+        <a href="planets/christophsis/index.html" class="planet-card fade-up fade-up-2">
           <div class="planet-card-img">
             <div class="planet-card-img-overlay"></div>
             <img src="assets/ChrisMain.png" alt="Christophsis tunnel map preview">
@@ -194,22 +197,18 @@
         </a>
 
         <!-- Placeholder locked entries -->
-        <a href="naboo/index.html" class="planet-card fade-up fade-up-2">
+        <div class="planet-card fade-up fade-up-4" style="opacity:.35; cursor:not-allowed; pointer-events:none;">
           <div class="planet-card-img">
-            <div class="planet-card-img-overlay"></div>
-            <img src="assets/NabooNox.png" alt="Christophsis tunnel map preview">
-            <span class="surface-unavail">MULTI-VIEW AVAILABLE</span>
+            <span class="planet-placeholder">[ NO SIGNAL ]</span>
           </div>
           <div class="planet-card-body">
-            <div class="planet-card-title">NABOO</div>
-            <div class="planet-card-meta">OUTER RIM · SECTOR 10 · SURVEY CS-5064</div>
+            <div class="planet-card-title">CLASSIFIED</div>
+            <div class="planet-card-meta">ACCESS RESTRICTED</div>
             <div class="planet-card-tags">
-              <span class="tag">CITY</span>
-              <span class="tag">SWAMP</span>
-              <span class="tag">INACTIVE ZONE</span>
+              <span class="tag">ENCRYPTED</span>
             </div>
           </div>
-        </a>
+        </div>
 
         <div class="planet-card fade-up fade-up-4" style="opacity:.35; cursor:not-allowed; pointer-events:none;">
           <div class="planet-card-img">
@@ -223,6 +222,64 @@
             </div>
           </div>
         </div>
+        <!-- PREVIOUS SERVEYS  -->
+      </div>
+      <div class="section-header previous-surveys-header fade-up fade-up-1">
+        <div>
+          <div class="section-title">PREVIOUS SURVEYS</div>
+          <div class="section-sub">Select a planetary entry to access map views</div>
+        </div>
+        <span class="section-count">3 RECORDS</span>
+      </div>
+      <div class="planet-grid">
+        <a href="planets/naboo/index.html" class="planet-card fade-up fade-up-2">
+          <div class="planet-card-img">
+            <div class="planet-card-img-overlay"></div>
+            <img src="assets/NabooNox.png" alt="Naboo map preview">
+            <span class="surface-unavail">MULTI-VIEW AVAILABLE</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">NABOO</div>
+            <div class="planet-card-meta">MID RIM · SECTOR 10 · SURVEY CS-5064</div>
+            <div class="planet-card-tags">
+              <span class="tag">CITY</span>
+              <span class="tag">SWAMP</span>
+              <span class="tag">INACTIVE ZONE</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="planets/prime/index.html" class="planet-card fade-up fade-up-2">
+          <div class="planet-card-img">
+            <div class="planet-card-img-overlay"></div>
+            <img src="assets/PrimeMain.png" alt="Prime map preview">
+            <span class="surface-unavail">SINGLE VIEW</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">PRIME</div>
+            <div class="planet-card-meta">OUTER RIM · SECTOR XX · SURVEY XX-XXXX</div>
+            <div class="planet-card-tags">
+              <span class="tag">PLACEHOLDER</span>
+              <span class="tag">TAG</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="planets/carida/index.html" class="planet-card fade-up fade-up-2">
+          <div class="planet-card-img">
+            <div class="planet-card-img-overlay"></div>
+            <img src="assets/CaridaMain.png" alt="Carida map preview">
+            <span class="surface-unavail">SINGLE VIEW</span>
+          </div>
+          <div class="planet-card-body">
+            <div class="planet-card-title">CARIDIA</div>
+            <div class="planet-card-meta">OUTER RIM · SECTOR XX · SURVEY XX-XXXX</div>
+            <div class="planet-card-tags">
+              <span class="tag">PLACEHOLDER</span>
+              <span class="tag">TAG</span>
+            </div>
+          </div>
+        </a>
       </div>
     </main>
 
