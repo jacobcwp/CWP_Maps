@@ -139,6 +139,45 @@
       text-transform: uppercase;
     }
     .path-btn:hover { background: var(--accent2); color: var(--bg); }
+    .path-btn-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .path-btn-row .path-btn {
+      flex: 1 1 32%;
+      min-width: 72px;
+    }
+    .analysis-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px;
+    }
+    .analysis-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: .08em;
+      padding: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .analysis-btn:hover { background: var(--accent); color: var(--bg); }
+    .analyze-action-panel {
+      position: absolute;
+      top: 252px;
+      left: 16px;
+      width: 240px;
+      z-index: 10;
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--border);
+    }
     .path-result {
       padding: 6px 10px;
       font-family: var(--font-mono);
@@ -147,6 +186,36 @@
       line-height: 1.7;
       border-top: 1px solid var(--border);
       min-height: 28px;
+    }
+
+    .analysis-panel {
+      position: absolute;
+      top: 230px;
+      right: 16px;
+      width: 240px;
+      z-index: 10;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      max-height: 320px;
+      overflow: hidden;
+    }
+    .analysis-panel-body {
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .analysis-panel-body ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .analysis-panel-body li {
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     /* BG grid */
@@ -202,9 +271,23 @@
         <select class="path-select" id="path-to">
           <option value="">To: Select node</option>
         </select>
-        <button class="path-btn" id="path-btn">FIND PATH</button>
-        <button class="path-btn" id="path-clear" style="color:var(--text-dim); font-size:8px;">CLEAR</button>
+        <div class="path-btn-row">
+          <button class="path-btn" id="path-btn">FIND PATH</button>
+          <button class="path-btn" id="path-clear" style="color:var(--text-dim); font-size:8px;">CLEAR</button>
+          <button class="path-btn" id="path-mode-btn">Path Mode</button>
+        </div>
         <div class="path-result" id="path-result">Select two nodes to find a route.</div>
+      </div>
+
+      <div class="analyze-action-panel panel" id="analyze-action-panel">
+        <div class="panel-header">ANALYZE ACTIONS</div>
+        <div class="analysis-actions">
+          <button class="analysis-btn" id="run-analysis-btn">Analyze</button>
+          <button class="analysis-btn" id="simulate-traffic-btn">Simulate</button>
+          <button class="analysis-btn" id="heatmap-combined-btn">Heatmap</button>
+          <button class="analysis-btn" id="heatmap-traffic-btn">Traffic Map</button>
+          <button class="analysis-btn" id="reset-styles-btn">Reset</button>
+        </div>
       </div>
 
       <!-- Legend -->
@@ -253,17 +336,25 @@
         <button class="map-btn" id="cy-zoom-in" title="Zoom In">+</button>
         <button class="map-btn" id="cy-zoom-out" title="Zoom Out">−</button>
         <button class="map-btn" id="cy-fit" title="Fit" style="font-size:11px;">⌂</button>
-        <button class="map-btn" id="path-mode-btn">Path Mode</button>
         <button class="map-btn" id="edit-mode-btn">Edit Mode</button>
+        <button class="map-btn" id="analyze-mode-btn">Analyze Mode</button>
         <button class="map-btn edit-action-btn" id="connect-btn">Connect Nodes</button>
         <button class="map-btn edit-action-btn" id="delete-edge-btn">Delete Edge</button>
         <button class="map-btn edit-action-btn" id="edit-node-btn">Edit Node</button>
         <button class="map-btn" id="export-btn">Export Data</button>
       </div>
+
+      <div class="analysis-panel panel" id="analysis-panel">
+        <div class="panel-header">ANALYSIS</div>
+        <div class="analysis-panel-body" id="analysis-body">
+          <div class="info-empty">Press Analyze or Simulate to show ranked choke points, defensive positions, and tunnel usage.</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script src="../../scripts/graph-data.js"></script>
+  <script src="../../scripts/graph-analytics.js"></script>
   <script src="../../scripts/graph-viewer.js"></script>
 </body>
 </html>
